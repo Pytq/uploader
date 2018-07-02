@@ -1,12 +1,10 @@
 #!/bin/bash
 
-wget https://s3.amazonaws.com/lczero/training/games14800000.tar.gz
-mkdir games14800000
-tar -xzf games14800000.tar.gz -C games14800000/
-gzip games14800000/training.*
-
-
-for iit in {1..10}
+mkdir games
+for gnum in {1480..1680}
 do
-	echo "${iit}"
+	wget https://s3.amazonaws.com/lczero/training/games${gnum}0000.tar.gz
+	mkdir games/games${gnum}0000
+	tar -xzf games${gnum}0000.tar.gz -C games${gnum}0000/
+	gzip games/games${gnum}0000/training.*
 done

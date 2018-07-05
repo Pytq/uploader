@@ -8,6 +8,6 @@ do
 	echo "Extracting games ${gnum}..."
 	tar -xzf "games${gnum}0000.tar.gz" -C "games/games${gnum}0000/"
 	echo "zipping games ${gnum}..."
-	gzip "games/games${gnum}0000/training.*"
+	 ls games/games14800000/training.* | parallel --citation gzip {}
 	echo "${gnum} done"
 done

@@ -13,7 +13,7 @@ dataset:
   input: 'games/*/'
 
 training:
-    batch_size: 256                   # training batch
+    batch_size: 512                   # training batch
     test_steps: 2000                   # eval test set values after this many steps
     train_avg_report_steps: 50        # training reports its average values after this many steps.
     total_steps: 140000                # terminate after these steps
@@ -31,6 +31,6 @@ training:
     path: 'networks'    # network storage dir
 
 model:
-  filters: 256
-  residual_blocks: 20
+  filters: 128
+  residual_blocks: 10
 ...

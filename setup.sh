@@ -1,13 +1,14 @@
 #!/bin/bash
 
 mkdir games
-for gnum in {1481..1680}
+mkdir downloads
+for gnum in {1482..1680}
 do
-	wget https://s3.amazonaws.com/lczero/training/games${gnum}0000.tar.gz
+	wget -P downloads https://s3.amazonaws.com/lczero/training/games${gnum}0000.tar.gz
 	mkdir "games/games${gnum}0000"
 	echo "Extracting games ${gnum}..."
-	tar -xzf "games${gnum}0000.tar.gz" -C "games/games${gnum}0000/"
+	tar -xzf "downloads/games${gnum}0000.tar.gz" -C "games/games${gnum}0000/"
 	echo "zipping games ${gnum}..."
-	ls games/games14800000/training.* | parallel --citation gzip {}
+	ls games/games14800000/training.* | parallel gzip {}
 	echo "${gnum} done"
 done

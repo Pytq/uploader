@@ -1,7 +1,7 @@
 #!/bin/bash
 
 mkdir games
-for gnum in {1480..1680}
+for gnum in {1481..1680}
 do
 	wget https://s3.amazonaws.com/lczero/training/games${gnum}0000.tar.gz
 	mkdir "games/games${gnum}0000"

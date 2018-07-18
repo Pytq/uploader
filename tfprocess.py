@@ -223,7 +223,7 @@ class TFProcess:
         policy_loss, mse_loss, reg_term, _, _ = self.session.run(
             [self.policy_loss, self.mse_loss, self.reg_term, self.train_op,
                 self.next_batch],
-            feed_dict={self.training: True, self.learning_rate: self.lr, self.handle: self.train_handle}, options=options, run_metadata=run_metadata))
+            feed_dict={self.training: True, self.learning_rate: self.lr, self.handle: self.train_handle}, options=options, run_metadata=run_metadata)
 
         fetched_timeline = timeline.Timeline(run_metadata.step_stats)
         chrome_trace = fetched_timeline.generate_chrome_trace_format()

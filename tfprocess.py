@@ -218,13 +218,12 @@ class TFProcess:
 
         options = tf.RunOptions(trace_level=tf.RunOptions.FULL_TRACE)
         run_metadata = tf.RunMetadata()
-        sess.run(res, options=options, run_metadata=run_metadata)
 
         # Run training for this batch
         policy_loss, mse_loss, reg_term, _, _ = self.session.run(
             [self.policy_loss, self.mse_loss, self.reg_term, self.train_op,
                 self.next_batch],
-            feed_dict={self.training: True, self.learning_rate: self.lr, self.handle: self.train_handle})
+            feed_dict={self.training: True, self.learning_rate: self.lr, self.handle: self.train_handle}, options=options, run_metadata=run_metadata))
 
         fetched_timeline = timeline.Timeline(run_metadata.step_stats)
         chrome_trace = fetched_timeline.generate_chrome_trace_format()

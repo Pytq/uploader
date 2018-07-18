@@ -22,6 +22,8 @@ import random
 import tensorflow as tf
 import time
 import bisect
+from tensorflow.python.client import timeline
+
 
 VERSION = 2
 
@@ -214,11 +216,20 @@ class TFProcess:
             # being equal to the value the end of a run is stored against.
             self.calculate_test_summaries(test_batches, steps + 1)
 
+	options = tf.RunOptions(trace_level=tf.RunOptions.FULL_TRACE)
+        run_metadata = tf.RunMetadata()
+        sess.run(res, options=options, run_metadata=run_metadata)
+
         # Run training for this batch
         policy_loss, mse_loss, reg_term, _, _ = self.session.run(
             [self.policy_loss, self.mse_loss, self.reg_term, self.train_op,
                 self.next_batch],
             feed_dict={self.training: True, self.learning_rate: self.lr, self.handle: self.train_handle})
+
+	fetched_timeline = timeline.Timeline(run_metadata.step_stats)
+        chrome_trace = fetched_timeline.generate_chrome_trace_format()
+        with open('timeline_01.json', 'w') as f:
+            f.write(chrome_trace)
 
         # Update steps since training should have incremented it.
         steps = tf.train.global_step(self.session, self.global_step)

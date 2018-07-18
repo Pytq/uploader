@@ -226,7 +226,7 @@ class TFProcess:
                 self.next_batch],
             feed_dict={self.training: True, self.learning_rate: self.lr, self.handle: self.train_handle})
 
-	fetched_timeline = timeline.Timeline(run_metadata.step_stats)
+        fetched_timeline = timeline.Timeline(run_metadata.step_stats)
         chrome_trace = fetched_timeline.generate_chrome_trace_format()
         with open('timeline_01.json', 'w') as f:
             f.write(chrome_trace)

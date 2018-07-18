@@ -1,5 +1,7 @@
 #!/bin/bash
 
+mkdir models
+mkdir networks
 mkdir games
 mkdir downloads
 for gnum in {1482..1680}

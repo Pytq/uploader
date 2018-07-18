@@ -216,7 +216,7 @@ class TFProcess:
             # being equal to the value the end of a run is stored against.
             self.calculate_test_summaries(test_batches, steps + 1)
 
-	options = tf.RunOptions(trace_level=tf.RunOptions.FULL_TRACE)
+        options = tf.RunOptions(trace_level=tf.RunOptions.FULL_TRACE)
         run_metadata = tf.RunMetadata()
         sess.run(res, options=options, run_metadata=run_metadata)
 
